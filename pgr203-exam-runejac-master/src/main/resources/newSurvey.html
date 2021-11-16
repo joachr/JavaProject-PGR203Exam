@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Survey</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h1 class="header">Create survey</h1>
+
+        <form method="POST" action="/api/newSurvey">
+            <label>Survey title: <input class="input" type="text" name="surveyName" autofocus required/></label>
+            <div id="moreQuestions">
+                <br>
+                <label for="questions0">Choose a question from the list:</label>
+                <br>
+                <br>
+                <button class="clickme warning" onclick="moreQuestionsFunc()">More questions</button>
+                <br>
+                <br>
+                <select id="questions0" name="questions"></select>
+            </div>
+
+            <br>
+
+            <button class="clickme success" type="submit">Create</button>
+        </form>
+
+        <br>
+        <hr>
+        <br>
+        <div>
+            <a href="/index.html">Return to front page</a>
+        </div>
+    </main>
+</body>
+
+<script>
+    let selectQuestion = document.getElementById("moreQuestions");
+    let index = 0;
+
+    function moreQuestionsFunc() {
+        selectQuestion.innerHTML += `<select id='questions${index+1}' name='questions'></select>`;
+        fetch("/api/questions")
+            .then(function(response) {
+                return response.text();
+            }).then(function(text) {
+            document.getElementById(`questions${index}`).innerHTML = text;
+        });
+        index++;
+    }
+
+    fetch("/api/questions")
+        .then(function(response) {
+            return response.text();
+        }).then(function(text) {
+        document.getElementById(`questions${index}`).innerHTML = text;
+    });
+</script>
+
+</html>

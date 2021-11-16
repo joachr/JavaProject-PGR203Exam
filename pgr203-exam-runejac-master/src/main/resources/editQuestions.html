@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update questions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+    <h1 class="header">Edit questions</h1>
+
+    <form method="post" action="/api/updateQuestion">
+        <label for="question-list">Choose question to edit</label>
+        <br>
+        <select id="question-list" name="question">
+        </select>
+        <br>
+        <br>
+        <label>New question name: <input class="input" type='text' name='question_name'></label>
+        <br>
+        <br>
+        <button class="clickme success" type="submit">Edit question</button>
+    </form>
+
+    <hr>
+    <br>
+    <div>
+        <a href="/index.html">Return to front page</a>
+    </div>
+
+</main>
+</body>
+
+<script>
+    fetch("/api/editQuestions")
+        .then(function(response) {
+            return response.text();
+        }).then(function(text) {
+        document.getElementById(`question-list`).innerHTML = text;
+    });
+</script>
+</html>
