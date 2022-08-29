@@ -1,5 +1,7 @@
 [![Eksamen](https://github.com/kristiania-pgr203-2021/pgr203-exam-runejac/actions/workflows/maven.yml/badge.svg)](https://github.com/kristiania-pgr203-2021/pgr203-exam-runejac/actions/workflows/maven.yml)
 
+Eksamen i samarbeid med Rune Jacobsen (https://github.com/runejac)
+
 ### SURVEY MANAGER
 
 Diagram som viser hva som skjer når man legger til spørsmål og svar.
