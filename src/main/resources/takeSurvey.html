@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Take survey</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main>
+    <h1 class="header">Take survey</h1>
+    <form method="POST" action="/api/getThisSurvey">
+        <div>
+            <label for="surveys">Choose survey</label>
+            <br>
+            <select name="survey" id="surveys"></select>
+        </div>
+        <div>
+            <label for="user-selection">Choose user</label>
+            <br>
+            <select id="user-selection" name="user">
+            </select>
+        </div>
+        <button class="clickme warning" id="get-surveys-btn" type="submit">Take survey</button>
+    </form>
+
+    <br>
+    <form method="POST" action="/api/deleteSurvey">
+        <label for="surveyDelete">Choose a survey to delete:</label>
+        <select id="surveyDelete" name="survey"></select>
+        <br>
+        <br>
+        <button class="clickme warningred" type="submit">Delete survey</button>
+    </form>
+    <br>
+
+    <div>
+        <a href="/index.html">Return to front page</a>
+    </div>
+</main>
+
+</body>
+<script>
+
+    fetch("/api/user")
+        .then(function(response) {
+            return response.text();
+        }).then(function(text) {
+        document.getElementById(`user-selection`).innerHTML = text;
+    });
+
+    fetch("/api/surveys")
+        .then(function(response) {
+            return response.text();
+        }).then(function(text) {
+        document.getElementById("surveys").innerHTML = text;
+    });
+
+    fetch("/api/surveys")
+        .then(function(response) {
+            return response.text();
+        }).then(function(text) {
+        document.getElementById("surveyDelete").innerHTML = text;
+    });
+
+    document.getElementById("get-surveys-btn").addEventListener("click", function () {
+        window.location.href = "takeSurvey.html";
+    })
+
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    function checkCookie() {
+        let user = getCookie("username");
+        if (user !== "") {
+            console.log("Cookie session username: " + user)
+        } else {
+            user = prompt("This is just a cookie, so please enter your name to have me remembering who you are:", "");
+            if (user !== "" && user != null) {
+                setCookie("username", user, 365);
+            }
+        }
+    }
+
+    checkCookie();
+
+</script>
+</html>

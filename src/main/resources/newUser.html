@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add user</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+    <h1 class="header">Add user</h1>
+
+    <form method="POST" action="/api/newUser">
+        <div id="addQuestion">
+            <label for="first-name-user">First name:</label>
+            <input class="input" placeholder="First name" type="text" name="firstname_user" id="first-name-user" autofocus required/>
+            <br>
+            <label for="last-name-user">Last name:</label>
+            <input class="input" placeholder="Last name" type="text" name="lastname_user" id="last-name-user" required/>
+            <br>
+            <label for="email">Email:</label>
+            <br>
+            <input class="input" type="email" placeholder="Email address" name="email" id="email" required>
+            <br>
+            <br>
+            <button class="clickme success" type="submit">Add user</button>
+        </div>
+    </form>
+
+    <hr>
+    <br>
+    <div>
+        <a href="/index.html">Return to front page</a>
+    </div>
+</main>
+
+</body>
+</html>
